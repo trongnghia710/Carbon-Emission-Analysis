@@ -204,7 +204,7 @@ GROUP BY
     pe.year
 ORDER BY 
     pe.year;
-```sql
+```
 |year|average_carbon_emissions|
 |----|------------------------|
 |2013|2399.32|

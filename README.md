@@ -74,14 +74,13 @@ LIMIT 10;
 
 Wind turbines dominate the list, with their manufacturing and installation creating carbon footprints far higher than any other products. Automobiles and infrastructure projects also contribute significantly, but their emissions are an order of magnitude lower than turbines.
 ### 4.2. What are the industry groups of these products?
-```
+``` sql
 SELECT 
      ig.industry_group
 FROM product_emissions pe
 JOIN industry_groups ig 
     ON pe.industry_group_id = ig.id
 GROUP BY ig.industry_group;
-
 ```
 
 |industry_group|
@@ -118,7 +117,7 @@ GROUP BY ig.industry_group;
 |Utilities|
 The products span a very wide range of industries, from heavy industrial sectors like Automobiles & Components, Electrical Equipment and Machinery, Energy, Mining, and Chemicals to consumer-oriented sectors such as Food & Beverage, Textiles, Apparel, Household & Personal Products, and Retailing.
 ### 4.3. What are the industries with the highest contribution to carbon emissions?
-```
+```sql
 SELECT 
     ig.industry_group,
     ROUND(SUM(pe.carbon_footprint_pcf),2) AS total_carbon_emissions
@@ -143,7 +142,7 @@ LIMIT 5;
 |Capital Goods|258712.00|
 Electrical Equipment & Machinery dominates (9.8M PCF), followed by Automobiles & Components (2.6M).
 ### 4.4. What are the companies with the highest contribution to carbon emissions?
-```
+```sql
 SELECT 
     c.company_name,
     ROUND(SUM(pe.carbon_footprint_pcf),2) AS total_carbon_emissions
@@ -169,7 +168,7 @@ LIMIT 5;
 Gamesa Corporación Tecnológica, S.A. alone accounts for ~9.8M PCF, almost the entire Electrical Equipment & Machinery footprint (wind turbines).
 
 ### 4.5. What are the countries with the highest contribution to carbon emissions?
-```
+```sql
 SELECT 
     c.country_name,
     SUM(pe.carbon_footprint_pcf) AS total_carbon_emissions
@@ -195,7 +194,7 @@ LIMIT 5;
 
 Spain leads overwhelmingly (9.7M PCF), reflecting Gamesa’s dominance.Followed by Germany, Japan, USA, South Korea — all advanced industrial economies.
 ### 4.6. What is the trend of carbon footprints (PCFs) over the years?
-```
+```sql
 SELECT 
     pe.year,
     AVG(pe.carbon_footprint_pcf) AS average_carbon_emissions
@@ -205,8 +204,7 @@ GROUP BY
     pe.year
 ORDER BY 
     pe.year;
-```
-
+```sql
 |year|average_carbon_emissions|
 |----|------------------------|
 |2013|2399.32|
@@ -222,7 +220,7 @@ ORDER BY
 2016–2017: emissions dropped, stabilizing at 4K–6.8K.
 
 ### 4.7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time? 
-```
+```sql
 SELECT 
 	pe.year,
 	ig.industry_group,
